@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Produto } from '../produto';
+import { ProdutoService } from '../produto.service';
 
 @Component({
   selector: 'form-produtos',
@@ -6,18 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-produtos.component.css']
 })
 export class FormProdutosComponent implements OnInit {
-  produto = {id:0, nome:'', preco: 0.0};
-  produtos: any[] = [];
+  produto: Produto = new Produto();
 
-  constructor() { }
+  constructor(private produtoService: ProdutoService) { }
 
   ngOnInit(): void {
   }
 
   cadastrar() {
-    this.produtos.push(this.produto);
-    console.log(this.produtos);
-    this.produto = {id:0, nome:'', preco: 0.0};
+    this.produtoService.addProduto(this.produto);
+    this.produto = new Produto();
   }
 
 }
